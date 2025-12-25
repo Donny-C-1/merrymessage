@@ -1,10 +1,14 @@
 <script>
+    import { page } from "$app/state";
+
     let name = $state("");
     let message = $state("");
+    let link = $state("");
+
     function onsubmit(e) {
         e.preventDefault();
 
-        alert(`Name: ${name} \n Message: ${message}`)
+        link = new URL(`/message?name=${name}&message=${message}`, page.url.href);
     }
 </script>
 
@@ -19,4 +23,8 @@
         <textarea name="message" id="message" bind:value={message}></textarea>
         <button>Generate link</button>
     </form>
+
+    <div>
+        <p>The link is: {link}</p>
+    </div>
 </main>
