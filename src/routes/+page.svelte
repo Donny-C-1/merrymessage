@@ -8,7 +8,9 @@
     function onsubmit(e) {
         e.preventDefault();
 
-        link = new URL(`/message?name=${name}&message=${message}`, page.url.href);
+        link = new URL("/message", page.url.href);
+        link.searchParams.set("name", name);
+        link.searchParams.set("message", message);
     }
 </script>
 
