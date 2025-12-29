@@ -9,8 +9,9 @@
         e.preventDefault();
 
         link = new URL("/message", page.url.href);
-        link.searchParams.set("name", name);
-        link.searchParams.set("message", message);
+        let payload = btoa(JSON.stringify({ name, message }));
+
+        link.searchParams.set("p", payload);
     }
 </script>
 

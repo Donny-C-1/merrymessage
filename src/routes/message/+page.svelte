@@ -6,8 +6,10 @@
     let message = $state("");
 
     onMount(() => {
-        name = page.url.searchParams.get("name");
-        message = page.url.searchParams.get("message");
+        let payload = JSON.parse(atob(page.url.searchParams.get("p")));
+
+        name = payload.name;
+        message = payload.message;
     })
 </script>
 
