@@ -10,7 +10,7 @@
     async function onsubmit(e) {
         e.preventDefault();
 
-        link = new URL("/message", page.url.href);
+        link = new URL("../message", page.url.href);
 
         let payload = btoa(encodeURIComponent(JSON.stringify({ name, message })));
 
