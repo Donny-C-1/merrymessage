@@ -3,11 +3,13 @@
     import { onMount } from "svelte";
 
     let name = $state("");
+    let receiversName = $state("");
     let message = $state("");
 
     onMount(() => {
         let payload = JSON.parse(decodeURIComponent(atob(page.url.searchParams.get("p"))));
 
+        receiversName = payload.receiversName;
         name = payload.name;
         message = payload.message;
     })
@@ -15,8 +17,9 @@
 
 <main>
     <div class="card">
-        <h1>Happy New Year {name}</h1>
+        <h1>Happy New Year {receiversName}</h1>
         <p>{message}</p>
+        <p>- From: {name}</p>
     </div>
 </main>
 

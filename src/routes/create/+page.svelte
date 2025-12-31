@@ -12,7 +12,7 @@
 
         link = new URL("./message", page.url.href);
 
-        let payload = btoa(encodeURIComponent(JSON.stringify({ name, message })));
+        let payload = btoa(encodeURIComponent(JSON.stringify({ name, receiversName, message })));
 
         link.searchParams.set("p", payload);
 
