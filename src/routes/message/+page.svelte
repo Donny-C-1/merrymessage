@@ -39,8 +39,6 @@
 </main>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap');
-
     main {
         min-height: 100vh;
         display: flex;
