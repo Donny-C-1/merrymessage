@@ -6,8 +6,9 @@
     let name = $state("");
     let receiversName = $state("");
     let message = $state("");
+    let shareUrl = $state("");
 
-    function combined(node, options) {
+    function combined(node) {
         const fadeTransition = fade(node, { duration: 500 });
         const scaleTransition = scale(node, { start: 0.95, duration: 500 });
         return {
@@ -20,21 +21,43 @@
     }
 
     onMount(() => {
-        let payload = JSON.parse(decodeURIComponent(atob(page.url.searchParams.get("p"))));
+        let payload = JSON.parse(
+            decodeURIComponent(atob(page.url.searchParams.get("p")))
+        );
+
         receiversName = payload.receiversName;
         name = payload.name;
         message = payload.message;
+
+        const text = encodeURIComponent(
+            `🎆 I made a New Year message for you!\n\nOpen it here 👉`
+        );
+
+        shareUrl = `https://wa.me/?text=${text}%20${encodeURIComponent(page.url.href)}`;
     });
 </script>
 
 <main>
-    <div class="card" in:combined>
-        <div class="fireworks">
-            <span></span><span></span><span></span><span></span>
+    <div class="wrapper">
+        <div class="card" in:combined>
+            <div class="fireworks">
+                <span></span><span></span><span></span><span></span>
+            </div>
+
+            <h1>🎆 Happy New Year, {receiversName}! 🎆</h1>
+            <p class="message">{message}</p>
+            <p class="from">— From: {name}</p>
         </div>
-        <h1>🎆 Happy New Year, {receiversName}! 🎆</h1>
-        <p class="message">{message}</p>
-        <p class="from">— From: {name}</p>
+
+        <!-- Share Button -->
+        <a
+            class="share-btn"
+            href={shareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Share on WhatsApp 💚
+        </a>
     </div>
 </main>
 
@@ -44,21 +67,29 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* elegant midnight gradient */
+        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
         padding: 2rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 600px;
     }
 
     .card {
         position: relative;
-        max-width: 600px;
         width: 100%;
-        background: radial-gradient(circle at top left, #ffe29f, #ff7e5f); /* warm festive gradient */
+        background: radial-gradient(circle at top left, #ffe29f, #ff7e5f);
         border-radius: 24px;
         padding: 3rem 2rem;
         box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         text-align: center;
         color: #1a1a1a;
-        font-family: 'Quicksand', sans-serif;
         overflow: hidden;
     }
 
@@ -66,7 +97,6 @@
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
         font-weight: 700;
-        text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
     }
 
     .message {
@@ -83,19 +113,33 @@
         color: #333;
     }
 
-    /* Fireworks / star accents */
+    /* Share Button */
+    .share-btn {
+        background: linear-gradient(45deg, #25D366, #1ebe57);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-size: 1.05rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+    }
+
+    /* Fireworks */
     .fireworks {
         position: absolute;
-        top: 0;
-        left: 50%;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         pointer-events: none;
     }
 
     .fireworks span {
         position: absolute;
-        display: block;
         width: 6px;
         height: 6px;
         background: gold;
@@ -115,13 +159,8 @@
         100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
     }
 
-    /* Responsive adjustments */
     @media (max-width: 480px) {
-        .card {
-            padding: 2rem 1rem;
-        }
         h1 { font-size: 2rem; }
         .message { font-size: 1.1rem; }
-        .from { font-size: 1rem; }
     }
 </style>
