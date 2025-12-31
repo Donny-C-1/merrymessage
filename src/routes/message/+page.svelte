@@ -6,7 +6,7 @@
     let message = $state("");
 
     onMount(() => {
-        let payload = JSON.parse(atob(page.url.searchParams.get("p")));
+        let payload = JSON.parse(decodeURIComponent(atob(page.url.searchParams.get("p"))));
 
         name = payload.name;
         message = payload.message;
@@ -29,7 +29,7 @@
     .card {
         text-align: center;
         font-family: Quicksand;
-        padding-top: 4rem;
+        padding: 4rem 2rem;
     }
     h1 {
         font-size: 2rem;
@@ -39,5 +39,6 @@
         font-weight: 500;
         font-size: 1.2rem;
         font-style: oblique;
+        line-height: 2;
     }
 </style>
