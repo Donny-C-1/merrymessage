@@ -1,0 +1,1 @@
+import{f as r,a as o}from"../chunks/HYZg-PLu.js";import"../chunks/NGsmy1BR.js";var t=r('<main><h1>Welcome to MerryMessage</h1> <p>Create a christmas message to your loved ones</p> <a href="/create">Create Card</a></main>');function n(a){var e=t();o(a,e)}export{n as component};
