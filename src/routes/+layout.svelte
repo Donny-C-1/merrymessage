@@ -1,12 +1,15 @@
 <script>
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from "$lib/assets/favicon.png";
 	import "$lib/styles/app.css";
 
 	let { children } = $props();
 </script>
 
 <svelte:head>
+	<title>merrymessage</title>
 	<link rel="icon" href={favicon} />
+	<meta name="description" content="Create and share a new year message with your loved ones" />
+	<meta name="author" content="Donny C" />
 </svelte:head>
 
 <div>
