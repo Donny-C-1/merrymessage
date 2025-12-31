@@ -1,9 +1,13 @@
 <script>
     import { page } from "$app/state";
+    import { tick } from "svelte";
+    import { fly, fade } from "svelte/transition";
+
     let name = $state("");
     let receiversName = $state("");
     let message = $state("");
     let link = $state();
+    let showToast = $state(false);
 
     async function onsubmit(e) {
         e.preventDefault();
@@ -14,7 +18,10 @@
 
         try {
             await navigator.clipboard.writeText(link);
-            alert("Link copied to clipboard!");
+
+            showToast = true;
+            await tick(); // wait for DOM update
+            setTimeout(() => showToast = false, 2000); // hide after 2s
         } catch (err) {
             alert("Error copying link.");
         }
@@ -49,6 +56,12 @@
                 <button type="submit">Generate Link</button>
             </div>
         </form>
+
+        {#if showToast}
+            <div class="toast" in:fly={{ y: 20, duration: 300 }} out:fade={{ duration: 300 }}>
+                ✨ Link copied to clipboard! ✨
+            </div>
+        {/if}
 
         <div class="sparkles">
             <span></span><span></span><span></span><span></span><span></span>
@@ -169,6 +182,22 @@ button:hover {
 .preview:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 215, 0, 0.95);
+    color: #1a1a1a;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    z-index: 100;
 }
 
 /* Sparkles animation */
