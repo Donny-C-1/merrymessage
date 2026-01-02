@@ -1,38 +1,60 @@
-# sv
+# MerryMessage
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A lightweight ecard platform. Create and share beautiful New Year Messages to your loved ones.
+Preview [live](https://donny-c-1.github.io/merrymessage)
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Create a message card with sharable link
+- User-friendly interface
+- Share on whatsapp or with the link
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Installation
 
-# create a new project in my-app
-npx sv create my-app
+```bash
+git clone https://github.com/yourusername/MerryMessage.git
+cd MerryMessage
+npm install
 ```
 
-## Developing
+## Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Open your browser and navigate to `http://localhost:5173`
 
-To create a production version of your app:
+## Project Structure
 
-```sh
-npm run build
+```
+MerryMessage/
+├── src/
+│   ├── lib/
+│   ├── routes/
+│   └── app.html
+├── static/
+├── package.json
+└── README.md
 ```
 
-You can preview the production build with `npm run preview`.
+## Requirements
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- Node.js v20+
+- npm or yarn
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Support
+
+For issues and questions, please open an issue on GitHub.
